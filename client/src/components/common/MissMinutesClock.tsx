@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Clock } from 'lucide-react';
 
 export default function MissMinutesClock() {
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -22,8 +21,9 @@ export default function MissMinutesClock() {
 
   return (
     <div className="relative flex items-center justify-center w-64 h-64 mx-auto mb-8">
-      {/* Clock Face */}
+      {/* Clean Clock Face */}
       <div className="relative w-full h-full rounded-full bg-gradient-to-br from-orange-600/20 to-amber-500/20 backdrop-blur-sm border-2 border-orange-400/30 shadow-2xl">
+        
         {/* Clock Numbers */}
         {[...Array(12)].map((_, i) => {
           const angle = (i * 30 - 90) * (Math.PI / 180);
@@ -84,15 +84,10 @@ export default function MissMinutesClock() {
           <div className="absolute w-3 h-3 bg-orange-400 rounded-full"></div>
         </div>
 
-        {/* Miss Minutes Eyes */}
-        <div className="absolute top-6 left-1/2 transform -translate-x-1/2 flex gap-2">
-          <div className="w-2 h-2 bg-orange-300 rounded-full animate-pulse"></div>
-          <div className="w-2 h-2 bg-orange-300 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+        {/* TVA Branding */}
+        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 text-orange-300 font-mono font-bold text-xs opacity-80">
+          TVA
         </div>
-
-        {/* Clock Arms */}
-        <div className="absolute left-4 top-1/2 transform -translate-y-1/2 w-8 h-1 bg-orange-400/50 rounded-full"></div>
-        <div className="absolute right-4 top-1/2 transform -translate-y-1/2 w-8 h-1 bg-orange-400/50 rounded-full"></div>
       </div>
 
       {/* Digital Time Display */}

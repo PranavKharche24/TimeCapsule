@@ -1,0 +1,162 @@
+Perfect 👍 since you’re deploying **frontend and backend independently**, I’ll give you a **Frontend Features Chart + Detailed Description** for the **“Time Capsule – Future Message Delivery Platform”**.
+This will help you design the **UI/UX side** fully before wiring it up with the backend.
+
+---
+
+# 🎨 **Frontend Features (Time Capsule Platform)**
+
+## 🔑 1. **Authentication & User Management**
+
+* **Sign Up Page**
+
+  * Email/Password signup form.
+  * Social login (Google/GitHub optional).
+  * Email verification screen.
+* **Login Page**
+
+  * Email/password login.
+  * “Forgot Password” flow.
+* **Profile Page**
+
+  * User details (username, email, profile pic).
+  * Capsule statistics (capsules created, scheduled, delivered).
+  * Account settings (change password, update profile).
+
+---
+
+## 📦 2. **Capsule Creation Workflow**
+
+* **Capsule Builder Page**
+
+  * **Input types**:
+
+    * Text editor (rich text with formatting).
+    * Media upload (images, video, audio).
+    * Audio recorder (mic access).
+  * **Recipient selection UI**:
+
+    * Self-only capsule.
+    * Add recipient emails (multiple).
+  * **Date picker & time selector**:
+
+    * Calendar UI to choose unlock/delivery date.
+  * **Capsule locking switch**:
+
+    * “Seal capsule” → prevents editing after creation.
+
+* **Preview Mode**
+
+  * Users can preview how the capsule will appear to recipients.
+  * Option to edit or discard before final sealing.
+
+* **Capsule Confirmation Screen**
+
+  * Display capsule summary.
+  * Show scheduled date & recipients.
+  * “Confirm & Seal” button → sends request to backend.
+
+---
+
+## 📂 3. **Dashboard & Capsule Management**
+
+* **User Dashboard** (after login)
+
+  * Capsule Categories (tabbed interface):
+
+    * **Upcoming Capsules** (scheduled, locked, waiting).
+    * **Delivered Capsules** (past messages).
+    * **Drafts** (saved but not sealed yet).
+  * Quick “+ New Capsule” floating button.
+
+* **Capsule Card View**
+
+  * Each capsule displayed as a card with:
+
+    * Capsule title (auto-generated if not provided).
+    * Status badge: *Scheduled*, *Delivered*, *Draft*.
+    * Scheduled unlock date.
+    * Recipient count.
+  * Actions: View / Delete / Edit (if draft).
+
+---
+
+## 🌍 4. **Community Capsules (Public Time Board)**
+
+* **Explore Page**
+
+  * Grid/list of **public capsules**.
+  * Capsules appear **blurred/locked** until their unlock date.
+  * Countdown timer (e.g., “Unlocks in 2 days”).
+
+* **Capsule Reveal**
+
+  * Once date arrives, capsule unlocks and content becomes visible.
+  * Users can like/comment/share (optional).
+
+---
+
+## 🔔 5. **Notifications & Reminders**
+
+* **Notification Center (Frontend UI)**
+
+  * Bell icon in navbar.
+  * Shows:
+
+    * Capsule delivered notifications.
+    * Reminders: “You have a capsule unlocking soon!”
+  * In-app toast/snackbar for real-time updates.
+
+---
+
+## ⚙️ 6. **Settings & Preferences**
+
+* **Theme Switcher**: Light/Dark mode toggle.
+* **Notification Preferences**:
+
+  * Enable/disable email reminders.
+  * Enable/disable in-app notifications.
+* **Privacy Settings**:
+
+  * Decide if your capsules can be posted to community.
+
+---
+
+## 📊 7. **Extras (Value-Add Features)**
+
+* **AI Reflection (Frontend UI Only)**
+
+  * Optional toggle when creating a capsule → “Generate an AI Reflection when unlocked.”
+  * Placeholder preview text (“AI Reflection will appear when capsule unlocks”).
+
+* **Search & Filter in Dashboard**
+
+  * Search bar for capsule titles/recipients.
+  * Filters: *Delivered / Upcoming / Draft*.
+
+* **Gamification Elements** (UI-only)
+
+  * Badges: “First Capsule”, “Future Traveler”, “5 Years+ Capsule.”
+  * Progress tracker (e.g., Capsule streaks).
+
+---
+
+# 📋 **Frontend Feature Chart**
+
+| **Module**             | **Frontend Features**                                                                                     |
+| ---------------------- | --------------------------------------------------------------------------------------------------------- |
+| **Auth & Profile**     | Signup, Login, Email verification, Profile edit, Account settings                                         |
+| **Capsule Creation**   | Rich text editor, Media upload, Audio recording, Recipient selector, Date picker, Preview, Confirm & Seal |
+| **Dashboard**          | Tabs (Upcoming/Delivered/Drafts), Capsule cards, Search & filters, Capsule actions                        |
+| **Community Capsules** | Public capsule board, Locked capsule preview, Countdown timer, Reveal on unlock date                      |
+| **Notifications**      | In-app notification bell, Toast popups, Delivery reminders                                                |
+| **Settings**           | Dark/Light theme toggle, Notification preferences, Privacy controls                                       |
+| **Extras**             | AI Reflection placeholder, Gamification badges, Progress tracker                                          |
+
+---
+
+👉 This **Frontend-Only Spec** is **independent** of backend—you just need to wire APIs later.
+It gives you a **rich, non-conventional UI/UX** that feels like a mix of a **social app + scheduler + vault**.
+
+---
+
+Do you want me to now **design the complete UI flow (screens + navigation map)** so you’ll have a clear React/Next.js page structure before coding?

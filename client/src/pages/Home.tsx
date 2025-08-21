@@ -1,218 +1,270 @@
-import { Link } from 'wouter';
-import { Play, Plus, Calendar, Mic, Video, Brain, Users, Bell, Shield, Rocket, Eye, MessageCircleQuestion } from 'lucide-react';
-import Navigation from '@/components/layout/Navigation';
-import { Button } from '@/components/ui/button';
+import { Link } from "wouter";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import MissMinutesClock from "@/components/common/MissMinutesClock";
+import { Clock, Calendar, Users, Shield, Sparkles, ArrowRight, Lock, Heart, Eye, Plus } from "lucide-react";
+import { useAuthStore } from "@/store/authStore";
 
+// Plan V3 Time Capsule Home Page with Loki/TVA Theming
 export default function Home() {
+  const { isAuthenticated } = useAuthStore();
+
   return (
-    <div className="min-h-screen">
-      <Navigation />
-      
-      {/* Hero Section */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-cascade-in" data-testid="hero-title">
-            <span className="bg-gradient-to-r from-tva-orange via-timeline-green to-pruning-red bg-clip-text text-transparent">
-              Send Messages
-            </span>
-            <br />
-            <span className="text-gray-900 dark:text-white">
-              To The Future
-            </span>
-          </h1>
-          
-          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-12 max-w-3xl mx-auto animate-cascade-in cascade-delay-1" data-testid="hero-description">
-            Create time capsules that unlock at the perfect moment. Connect with your future self and others across the sacred timeline.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-cascade-in cascade-delay-2">
-            <Link href="/create">
-              <Button 
-                size="lg"
-                className="px-8 py-4 bg-gradient-to-r from-tva-orange to-pruning-red text-white font-semibold rounded-xl hover:scale-105 transition-all duration-300 animate-pulse-glow"
-                data-testid="create-first-capsule"
-              >
-                <Plus className="mr-2" />
-                Create Your First Capsule
-              </Button>
-            </Link>
-            <Button 
-              size="lg"
-              variant="ghost"
-              className="px-8 py-4 glassmorphism text-gray-900 dark:text-white font-semibold rounded-xl hover:scale-105 transition-all duration-300"
-              data-testid="watch-demo"
-            >
-              <Play className="mr-2" />
-              Watch Demo
-            </Button>
-          </div>
-        </div>
-      </section>
+    <div className="min-h-screen bg-gradient-to-br from-orange-950 via-amber-900 to-yellow-800 relative overflow-hidden">
+      {/* TVA Grid Background */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,#f97316_1px,transparent_1px),linear-gradient(180deg,#f97316_1px,transparent_1px)] bg-[size:50px_50px]"></div>
+      </div>
 
-      {/* Dashboard Preview */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+      {/* Sacred Timeline Particles */}
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(30)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-orange-400/40 rounded-full animate-pulse"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${2 + Math.random() * 2}s`,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Main Content */}
+      <div className="relative z-10 px-6 pt-20 pb-10">
+        <div className="max-w-6xl mx-auto">
+          
+          {/* Hero Section with Miss Minutes Clock */}
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 animate-cascade-in" data-testid="timeline-title">
-              <span className="bg-gradient-to-r from-timeline-green to-tva-orange bg-clip-text text-transparent">
-                Your Timeline
-              </span>
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 animate-cascade-in cascade-delay-1">
-              Manage your temporal messages across past, present, and future
-            </p>
-          </div>
-          
-          {/* Tabs */}
-          <div className="flex justify-center mb-12">
-            <div className="glassmorphism rounded-xl p-2 inline-flex animate-cascade-in cascade-delay-2" data-testid="timeline-tabs">
-              <Button className="px-6 py-3 bg-tva-orange text-white rounded-lg font-semibold transition-all duration-300">
-                Upcoming Capsules
-              </Button>
-              <Button variant="ghost" className="px-6 py-3 text-gray-700 dark:text-gray-300 hover:text-timeline-green rounded-lg font-semibold transition-all duration-300">
-                Delivered
-              </Button>
-              <Button variant="ghost" className="px-6 py-3 text-gray-700 dark:text-gray-300 hover:text-pruning-red rounded-lg font-semibold transition-all duration-300">
-                Drafts
-              </Button>
-            </div>
-          </div>
-          
-          {/* Capsule Cards Grid - Sample Data */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="interactive-card glassmorphism rounded-xl p-6 animate-cascade-in cascade-delay-3" data-testid="sample-capsule-1">
-              <div className="flex items-center justify-between mb-4">
-                <span className="px-3 py-1 bg-timeline-green/20 text-timeline-green rounded-full text-sm font-semibold">
-                  Scheduled
-                </span>
-                <div className="text-2xl">📝</div>
-              </div>
-              
-              <h3 className="text-xl font-semibold mb-2">Letter to Future Me</h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-4">A reflection on my goals and dreams for the year ahead...</p>
-              
-              <div className="space-y-2 text-sm">
-                <div className="flex items-center text-gray-500 dark:text-gray-400">
-                  <Calendar className="w-4 h-4 mr-2" />
-                  <span>Unlocks: Jan 1, 2025</span>
-                </div>
-                <div className="flex items-center text-gray-500 dark:text-gray-400">
-                  <Users className="w-4 h-4 mr-2" />
-                  <span>Recipients: Just me</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Grid */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50/50 dark:bg-cosmic-gray/50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 animate-cascade-in" data-testid="features-title">
-              <span className="bg-gradient-to-r from-timeline-green to-pruning-red bg-clip-text text-transparent">
-                Temporal Features
-              </span>
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 animate-cascade-in cascade-delay-1">
-              Advanced capabilities for time-bound messaging
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                icon: Shield,
-                title: 'Temporal Sealing',
-                description: 'Lock your messages with cryptographic security until the designated unlock time.',
-                gradient: 'from-tva-orange to-pruning-red'
-              },
-              {
-                icon: Mic,
-                title: 'Rich Media',
-                description: 'Include text, images, audio recordings, and videos in your time capsules.',
-                gradient: 'from-timeline-green to-tva-orange'
-              },
-              {
-                icon: Brain,
-                title: 'AI Reflection',
-                description: 'Get AI-generated insights when your capsules unlock, comparing past and present.',
-                gradient: 'from-pruning-red to-timeline-green'
-              },
-              {
-                icon: Users,
-                title: 'Group Capsules',
-                description: 'Share time capsules with multiple recipients for collective future experiences.',
-                gradient: 'from-timeline-green to-pruning-red'
-              },
-              {
-                icon: Bell,
-                title: 'Smart Reminders',
-                description: 'Receive notifications when your capsules are about to unlock or arrive.',
-                gradient: 'from-tva-orange to-timeline-green'
-              },
-              {
-                icon: Shield,
-                title: 'Privacy First',
-                description: 'End-to-end encryption ensures your messages remain private and secure.',
-                gradient: 'from-pruning-red to-tva-orange'
-              },
-            ].map((feature, index) => (
-              <div 
-                key={feature.title}
-                className="glassmorphism rounded-xl p-6 text-center interactive-card animate-cascade-in"
-                style={{ animationDelay: `${(index + 2) * 0.1}s` }}
-                data-testid={`feature-${feature.title.toLowerCase().replace(' ', '-')}`}
-              >
-                <div className={`w-16 h-16 bg-gradient-to-br ${feature.gradient} rounded-full flex items-center justify-center mx-auto mb-4`}>
-                  <feature.icon className="text-white text-2xl" />
-                </div>
-                <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="glassmorphism rounded-3xl p-12 animate-cascade-in" data-testid="cta-section">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-tva-orange via-timeline-green to-pruning-red bg-clip-text text-transparent">
-                Start Your Temporal Journey
-              </span>
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 animate-cascade-in cascade-delay-1">
-              Join thousands of users already sending messages across the sacred timeline
-            </p>
+            <Badge variant="outline" className="bg-orange-900/30 border-orange-500/40 text-orange-200 mb-8" data-testid="badge-tva-protocol">
+              <Clock className="w-4 h-4 mr-2" />
+              Time Variance Authority Protocol
+            </Badge>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-cascade-in cascade-delay-2">
-              <Link href="/register">
-                <Button 
-                  size="lg"
-                  className="px-8 py-4 bg-gradient-to-r from-tva-orange to-pruning-red text-white font-semibold rounded-xl hover:scale-105 transition-all duration-300 animate-pulse-glow"
-                  data-testid="get-started-free"
-                >
-                  <Rocket className="mr-2" />
-                  Get Started Free
+            <h1 className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-orange-200 via-amber-100 to-yellow-200 bg-clip-text text-transparent mb-8 font-mono tracking-wider">
+              TIME CAPSULE
+            </h1>
+            
+            {/* Miss Minutes Clock */}
+            <MissMinutesClock />
+            
+            <p className="text-xl text-orange-100/80 max-w-3xl mx-auto leading-relaxed mb-8">
+              Secure temporal message delivery system approved by the Time Variance Authority. 
+              Create, schedule, and manage time-locked communications across the Sacred Timeline.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+              {isAuthenticated ? (
+                <>
+                  <Link href="/dashboard">
+                    <Button 
+                      size="lg" 
+                      className="bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-500 hover:to-amber-500 text-white font-semibold px-8 py-3 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg"
+                      data-testid="button-dashboard"
+                    >
+                      <Calendar className="w-5 h-5 mr-2" />
+                      My Timeline
+                      <ArrowRight className="w-5 h-5 ml-2" />
+                    </Button>
+                  </Link>
+                  
+                  <Link href="/create-capsule">
+                    <Button 
+                      variant="outline" 
+                      size="lg"
+                      className="border-orange-500/40 bg-orange-900/20 text-orange-200 hover:bg-orange-800/30 px-8 py-3 rounded-xl transition-all duration-300 backdrop-blur-sm"
+                      data-testid="button-create-new"
+                    >
+                      <Plus className="w-5 h-5 mr-2" />
+                      Create Capsule
+                    </Button>
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link href="/auth/register">
+                    <Button 
+                      size="lg" 
+                      className="bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-500 hover:to-amber-500 text-white font-semibold px-8 py-3 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg"
+                      data-testid="button-get-started"
+                    >
+                      <Calendar className="w-5 h-5 mr-2" />
+                      Begin Timeline
+                      <ArrowRight className="w-5 h-5 ml-2" />
+                    </Button>
+                  </Link>
+                  
+                  <Link href="/auth/login">
+                    <Button 
+                      variant="outline" 
+                      size="lg"
+                      className="border-orange-500/40 bg-orange-900/20 text-orange-200 hover:bg-orange-800/30 px-8 py-3 rounded-xl transition-all duration-300 backdrop-blur-sm"
+                      data-testid="button-login"
+                    >
+                      <Users className="w-5 h-5 mr-2" />
+                      Access Portal
+                    </Button>
+                  </Link>
+                </>
+              )}
+            </div>
+          </div>
+
+          {/* TVA Features Grid */}
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
+            <Card className="bg-gradient-to-br from-orange-900/40 to-amber-900/40 border-orange-500/20 backdrop-blur-sm hover:bg-orange-800/50 transition-all duration-300 group" data-testid="card-temporal-security">
+              <CardHeader>
+                <div className="w-12 h-12 bg-orange-600/20 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <Shield className="w-6 h-6 text-orange-300" />
+                </div>
+                <CardTitle className="text-orange-100">Temporal Security</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="text-orange-200/70">
+                  Advanced TVA-approved encryption ensures your messages remain sealed until the predetermined moment in the Sacred Timeline.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gradient-to-br from-orange-900/40 to-amber-900/40 border-orange-500/20 backdrop-blur-sm hover:bg-orange-800/50 transition-all duration-300 group" data-testid="card-rich-media">
+              <CardHeader>
+                <div className="w-12 h-12 bg-orange-600/20 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <Sparkles className="w-6 h-6 text-orange-300" />
+                </div>
+                <CardTitle className="text-orange-100">Rich Content</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="text-orange-200/70">
+                  Include text, images, audio recordings, and videos in your temporal communications. Full multimedia support.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gradient-to-br from-orange-900/40 to-amber-900/40 border-orange-500/20 backdrop-blur-sm hover:bg-orange-800/50 transition-all duration-300 group" data-testid="card-timeline-management">
+              <CardHeader>
+                <div className="w-12 h-12 bg-orange-600/20 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <Clock className="w-6 h-6 text-orange-300" />
+                </div>
+                <CardTitle className="text-orange-100">Timeline Control</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="text-orange-200/70">
+                  Schedule deliveries from minutes to decades in the future with precision temporal targeting technology.
+                </CardDescription>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Community Timeline Preview */}
+          <div className="mb-16">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-orange-100 mb-4 font-mono">Sacred Timeline</h2>
+              <p className="text-orange-200/70 max-w-2xl mx-auto">
+                Explore public time capsules from across the multiverse. Some are unlocked and ready to read, 
+                others are still sealed until their delivery date.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Unlocked Capsule */}
+              <Card className="bg-gradient-to-br from-orange-800/40 to-amber-800/40 border-green-500/30 hover:bg-orange-700/50 transition-all duration-300" data-testid="capsule-unlocked">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center justify-between">
+                    <Badge className="bg-green-500/20 text-green-300 border-green-500/30">
+                      <Eye className="w-3 h-3 mr-1" />
+                      Unlocked
+                    </Badge>
+                    <span className="text-orange-200/60 text-sm">Dec 2023</span>
+                  </div>
+                  <CardTitle className="text-orange-100 text-lg">College Dreams Realized</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-orange-200/80 text-sm mb-3">
+                    "Writing this on graduation day, hoping future me achieves everything we dreamed of today..."
+                  </p>
+                  <div className="flex items-center justify-between text-xs text-orange-200/60">
+                    <span>by @sacred_timeline</span>
+                    <div className="flex items-center gap-2">
+                      <Heart className="w-3 h-3" />
+                      <span>142</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Locked Capsule */}
+              <Card className="bg-gradient-to-br from-orange-900/40 to-amber-900/40 border-orange-500/30 hover:bg-orange-800/50 transition-all duration-300" data-testid="capsule-locked">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center justify-between">
+                    <Badge className="bg-orange-500/20 text-orange-300 border-orange-500/30">
+                      <Lock className="w-3 h-3 mr-1" />
+                      Sealed
+                    </Badge>
+                    <span className="text-orange-200/60 text-sm">June 2024</span>
+                  </div>
+                  <CardTitle className="text-orange-100 text-lg">Future Wisdom</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-center py-6">
+                    <Lock className="w-8 h-8 text-orange-400 mx-auto mb-2" />
+                    <p className="text-orange-200/60 text-sm mb-2">This capsule is temporally sealed</p>
+                    <p className="text-orange-300 text-xs">Unlocks in 4 months, 12 days</p>
+                  </div>
+                  <div className="flex items-center justify-between text-xs text-orange-200/60">
+                    <span>by @time_keeper</span>
+                    <div className="flex items-center gap-2">
+                      <Clock className="w-3 h-3" />
+                      <span>Countdown active</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Long-term Capsule */}
+              <Card className="bg-gradient-to-br from-orange-900/40 to-amber-900/40 border-yellow-500/30 hover:bg-orange-800/50 transition-all duration-300" data-testid="capsule-future">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center justify-between">
+                    <Badge className="bg-yellow-500/20 text-yellow-300 border-yellow-500/30">
+                      <Lock className="w-3 h-3 mr-1" />
+                      Long-term
+                    </Badge>
+                    <span className="text-orange-200/60 text-sm">Jan 2030</span>
+                  </div>
+                  <CardTitle className="text-orange-100 text-lg">Decade Reflections</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-center py-6">
+                    <Lock className="w-8 h-8 text-yellow-400 mx-auto mb-2" />
+                    <p className="text-orange-200/60 text-sm mb-2">Extended temporal lock</p>
+                    <p className="text-yellow-300 text-xs">Unlocks in 5 years, 2 months</p>
+                  </div>
+                  <div className="flex items-center justify-between text-xs text-orange-200/60">
+                    <span>by @decade_dreamer</span>
+                    <div className="flex items-center gap-2">
+                      <Sparkles className="w-3 h-3" />
+                      <span>AI Reflection enabled</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="text-center mt-8">
+              <Link href="/community">
+                <Button variant="outline" className="border-orange-500/40 text-orange-200 hover:bg-orange-800/30" data-testid="button-explore-timeline">
+                  Explore Full Timeline
+                  <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </Link>
-              <Button 
-                size="lg"
-                variant="ghost"
-                className="px-8 py-4 glassmorphism text-gray-900 dark:text-white font-semibold rounded-xl hover:scale-105 transition-all duration-300"
-                data-testid="learn-more"
-              >
-                <MessageCircleQuestion className="mr-2" />
-                Learn More
-              </Button>
             </div>
           </div>
+
         </div>
-      </section>
+      </div>
     </div>
   );
 }

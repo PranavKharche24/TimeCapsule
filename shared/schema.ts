@@ -11,8 +11,11 @@ export const users = pgTable("users", {
   firstName: text("first_name"),
   lastName: text("last_name"),
   profilePicture: text("profile_picture"),
-  createdAt: timestamp("created_at").default(sql`now()`),
-  updatedAt: timestamp("updated_at").default(sql`now()`),
+  emailVerified: boolean("email_verified").default(false),
+  role: text("role").default("user"),
+  settings: jsonb("settings"),
+  createdAt: timestamp("created_at").default(sql`now()`).notNull(),
+  updatedAt: timestamp("updated_at").default(sql`now()`).notNull(),
 });
 
 export const capsules = pgTable("capsules", {

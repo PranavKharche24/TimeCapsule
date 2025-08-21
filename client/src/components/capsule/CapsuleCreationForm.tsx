@@ -160,7 +160,7 @@ export default function CapsuleCreationForm() {
                 data-testid="input-delivery-date"
               />
               <div className="mt-2 text-sm text-gray-500">
-                <Clock className="w-4 h-4 inline mr-1" />
+                <Calendar className="w-4 h-4 inline mr-1" />
                 Choose when this capsule will unlock
               </div>
             </CardContent>

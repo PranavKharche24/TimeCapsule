@@ -16,21 +16,18 @@ import Register from "@/pages/Auth/Register";
 import NotFound from "@/pages/not-found";
 
 // Components
-import VideoBackground from "@/components/common/VideoBackground";
-import TemporalParticles from "@/components/common/TemporalParticles";
-import TVAClock from "@/components/common/TVAClock";
-import FloatingActionButton from "@/components/layout/FloatingActionButton";
+import Navigation from "@/components/layout/Navigation";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/dashboard" component={Dashboard} />
-      <Route path="/create" component={CreateCapsule} />
+      <Route path="/create-capsule" component={CreateCapsule} />
       <Route path="/community" component={Community} />
       <Route path="/profile" component={Profile} />
-      <Route path="/login" component={Login} />
-      <Route path="/register" component={Register} />
+      <Route path="/auth/login" component={Login} />
+      <Route path="/auth/register" component={Register} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -42,20 +39,14 @@ function App() {
       <ThemeProvider defaultTheme="dark" storageKey="timecapsule-theme">
         <TooltipProvider>
           <div className="relative min-h-screen overflow-x-hidden">
-            {/* Background Effects */}
-            <VideoBackground />
-            <TemporalParticles />
             
-            {/* Real-time TVA Clock */}
-            <TVAClock />
+            {/* Navigation */}
+            <Navigation />
             
             {/* Main Content */}
             <div className="relative z-20">
               <Router />
             </div>
-            
-            {/* Floating Action Button */}
-            <FloatingActionButton />
             
             {/* Toast Notifications */}
             <Toaster />

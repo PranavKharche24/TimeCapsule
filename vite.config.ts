@@ -27,11 +27,33 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    // Optimize for production
+    minify: 'terser',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          ui: ['@radix-ui/react-dialog', '@radix-ui/react-toast'],
+        },
+      },
+    },
+    // Ensure compatibility across platforms
+    target: 'es2015',
   },
   server: {
     fs: {
       strict: true,
       deny: ["**/.*"],
     },
+    host: true, // Allow external connections (for Docker)
+    port: 5173,
+  },
+  preview: {
+    host: true,
+    port: 3000,
+  },
+  // Ensure cross-platform compatibility
+  optimizeDeps: {
+    include: ['react', 'react-dom'],
   },
 });
